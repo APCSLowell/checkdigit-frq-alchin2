@@ -5,15 +5,15 @@ public class CheckDigit
    *  six, inclusive.  
    *          num >= 0  
    */  
-   public static int getCheck(int num) 
-   {  
-     int num = 0;
-     int i = 0;
-    while(i < getNumberOfDigits(num) && (7-i)>1){
-       num += getDigit(num)*(7-i);
-     }
-     return num&10;
-     }
+   public static int getCheck(int num)
+{
+int sum = 0;
+for (int i = 1; i <= getNumberOfDigits(num); i++)
+{
+sum += (8 - i) * getDigit(num, i);
+}
+return sum % 10;
+} 
    
  
   /** Returns true if numWithCheckDigit is valid, or false    
@@ -25,7 +25,7 @@ public class CheckDigit
    public static boolean isValid(int numWithCheckDigit)    
    {      
      
-    return (getCheck(numWithCheckDigit/10)==getDigit(numWithCheckDigit,getNumberOfDigits(numWithCheckDigit)-1));
+    return (getCheck(numWithCheckDigit/10)==numWithCheckDigit%10);
    }    
    
    /** Returns the number of digits in num. */    
